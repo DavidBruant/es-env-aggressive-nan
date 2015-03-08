@@ -10,24 +10,27 @@ var accurateIsNaN = Number.isNaN;
 
 function wrapAndThrowOnNaN(f){
     
-    // TODO change function.name and function.length
-    
-    return function(){
+    var ret = function(){
         var args = Array.prototype.slice.call(arguments);
         args.forEach(function(a, i){
             if(accurateIsNaN(a))
                 throw new TypeError(i+'-th argument is NaN');
         });
         
-        var ret = f.apply(this, args);
+        var result = f.apply(this, args);
         
-        if(accurateIsNaN(ret))
+        if(accurateIsNaN(result))
             // args.join(', ') may have side effects because of conversion to string
-            throw new TypeError('NaN returned by function '+f.name+'. Arguments: ['+args.join(', ')+']');
+            throw new TypeError('NaN returned by function '+f.name+'. this: '+this+'. Arguments: ['+args.join(', ')+']');
         
-        return ret;
+        return result;
     }
     
+    ret.prototype = f.prototype;
+    
+    // TODO change function.name and function.length in environments where it's possible
+    
+    return ret;
 }
 
 
@@ -50,6 +53,8 @@ function wrapAndThrowOnNaN(f){
 
 global.parseInt = wrapAndThrowOnNaN(global.parseInt);
 global.parseFloat = wrapAndThrowOnNaN(global.parseFloat);
+global.Number = wrapAndThrowOnNaN(Number);
+global.Date = wrapAndThrowOnNaN(Date);
 
 String.prototype.charCodeAt = wrapAndThrowOnNaN(String.prototype.charCodeAt);
 
