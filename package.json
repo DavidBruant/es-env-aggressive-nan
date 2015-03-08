@@ -1,0 +1,30 @@
+{
+  "name": "es-env-aggressive-nan",
+  "version": "1.0.0",
+  "description": " Tracking and getting rid of all NaNs!",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DavidBruant/es-env-aggressive-nan.git"
+  },
+  "keywords": [
+    "es-env",
+    "ECMAScript",
+    "NaN",
+    "errors",
+    "Math"
+  ],
+  "author": "David Bruant <bruant.d@gmail.com> (https://twitter.com/DavidBruant)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DavidBruant/es-env-aggressive-nan/issues"
+  },
+  "homepage": "https://github.com/DavidBruant/es-env-aggressive-nan",
+  "devDependencies": {
+    "chai": "^2.1.1",
+    "mocha": "^2.2.0"
+  }
+}
